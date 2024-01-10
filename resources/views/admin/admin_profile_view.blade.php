@@ -3,7 +3,7 @@
 
 <!--breadcrumb-->
 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">{{ Auth::user()->name}} Profile</div>
+    <div class="breadcrumb-title pe-3">{{ $adminData->name}} Profile</div>
     <div class="ps-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 p-0">
@@ -23,8 +23,9 @@
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="{{ (!empty($adminData->photo)) ? url('upload/admin_images/'.$adminData->photo) : url('upload/no_image.jpg') }}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
                             <div class="mt-3">
-                                <h4>{{ Auth::user()->name}}</h4>
-                                <p class="text-secondary mb-1">{{ Auth::user()->role}}</p>
+                                <h4>{{ $adminData->name}}</h4>
+                                <p class="text-secondary mb-1">{{ $adminData->email}}</p>
+                                <p class="text-secondary mb-1">{{ $adminData->address}}</p>
                             </div>
                         </div>
                         <hr class="my-4" />
