@@ -16,30 +16,73 @@
 <!--end breadcrumb-->
 <div class="container">
     <div class="main-body">
-        <div class="row">
-        <div class="col-lg-6">
-                <form method="POST" action="{{ route('admin.profile.store')}}" enctype="multipart/form-data">
+        <div class="row" style="padding: 10;">
+        <div class="col-lg-12">
+            <div class="card">
+            <div class="card-body">
+                <form method="POST" action="{{ route('update.password')}}">
                         @csrf
+                        @if(session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                        @elseif(session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+
                         <div class="row mb-3">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
+                                <h6 class="mb-0">Old Password</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" name="name" value="" />
+                                <input type="password" class="form-control @error('old_password') is-invalid @enderror " name="old_password" value="" 
+                                placeholder="Old Password" id="current_password" />
+
+
+                                @error("old_password")
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">New Password</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="password" class="form-control @error('new_password') is-invalid @enderror" 
+                                id="new_password" name="new_password" 
+                                placeholder="Enter new Password" />
+                                @error("new_password")
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Confirm New Password</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation"
+                                placeholder="Confirm new Password" />
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="submit" class="btn btn-primary px-4" value="Save Changes" />
+                                <input type="submit" class="btn btn-primary px-4" value="Update Password" />
                             </div>
                         </div>
                     </div>
                 </form>
-                    
+            </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
