@@ -48,7 +48,7 @@ class AdminController extends Controller
 
         if($request->file('photo')){
             $file = $request->file('photo');
-            @unlink(public_path('upload/admin_images'));
+            @unlink(public_path('upload/admin_images'.$data->photo));
             $filename = date('YdmHi').$file->getClientoriginalName();
             $file -> move(public_path('upload/admin_images'), $filename);
             $data['photo'] = $filename;
@@ -56,7 +56,16 @@ class AdminController extends Controller
 
         $data->save();
 
-        return redirect()->back();
+        $notification = array(
+            'message' => 'Admin profile updated successfully',
+            'alert-type' => 'success',
+        );
 
+        return redirect()->back()-> with($notification);
+
+    }//End Method
+
+    public function AdminChangePassword(Request $request){
+        return view('admin.admin_change_password');
     }//End Method
 }
